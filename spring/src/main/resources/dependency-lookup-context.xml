@@ -11,6 +11,11 @@
         <property name="id" value="1"/>
         <property name="name" value="姚世雨"/>
     </bean>
+
+    <bean id="superUser" class="com.learn.spring.ioc.dependency.domain.SupperUser" parent="user">
+        <property name="role" value="超级管理员"/>
+    </bean>
+
     <bean id="objectFactory" class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
         <property name="targetBeanName" value="user"/>
     </bean>
