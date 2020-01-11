@@ -18,8 +18,12 @@ public class TestController {
     @Autowired
     TestAopService testAopService;
 
+    @Autowired
+    AllBeanFactoryAndAppContext allBeanFactoryAndAppContext;
+
     @RequestMapping("/")
     public String test(){
+        System.out.println("全部上下文"+allBeanFactoryAndAppContext.toString());
         return "hello";
     }
 }
