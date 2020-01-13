@@ -16,9 +16,9 @@ public class 滑动窗口最大值 {
     Deque<Integer> deque = new ArrayDeque<>();
 
     public static void main(String[] args) {
-        int nums[] = new int[]{0,1,2,3};
+        int nums[] = new int[]{0, 1, 2, 3};
         System.out.println(nums.length);
-       
+
     }
 
     /*
@@ -29,23 +29,23 @@ public class 滑动窗口最大值 {
      * @return int[]
      **/
     public int[] maxSlidingWindow(int[] nums, int k) {
-        if(nums.length == 0 || k == 0){
+        if (nums.length == 0 || k == 0) {
             return new int[0];
         }
-        int n = (nums.length>=k)?k:nums.length;
-        int []results = new int[nums.length-n+1];
+        int n = (nums.length >= k) ? k : nums.length;
+        int[] results = new int[nums.length - n + 1];
         int index = 0;
 
         PriorityQueue<Integer> priorityQueue = new PriorityQueue<>(k, Comparator.reverseOrder());
 
-        for(int i = 0;i<nums.length;i++){
+        for (int i = 0; i < nums.length; i++) {
 
             priorityQueue.offer(nums[i]);
 
-            if(priorityQueue.size() > k){
-                priorityQueue.remove(nums[i-k]);
+            if (priorityQueue.size() > k) {
+                priorityQueue.remove(nums[i - k]);
             }
-            if(priorityQueue.size() == k){
+            if (priorityQueue.size() == k) {
                 results[index] = priorityQueue.peek();
                 index++;
             }
@@ -63,45 +63,38 @@ public class 滑动窗口最大值 {
      * @return int[]
      **/
     public int[] maxSlidingWindow2(int[] nums, int k) {
-        if(nums.length == 0 || k == 0){
+        if (nums.length == 0 || k == 0) {
             return new int[0];
         }
 
+        for (int i = 0; i < k; i++) {
+            clearDeque(deque,nums,i,k);
+            deque.addLast(i);
 
-        if(nums.length<=k){
-            for (int i = 0;i<nums.length;i++){
-                deque.addLast(nums[i]);
-                if(deque.peekFirst()<deque.peekLast()){
-                    deque.removeFirst();
-                }
-            }
-            return new int[]{deque.peekFirst()};
-        }else {
-            for (int i = 0;i<k;i++){
-                deque.addLast(nums[i]);
-                if(deque.peekFirst()<deque.peekLast()){
-                    deque.removeFirst();
-                }
-            }
-            int n = (nums.length>=k)?k:nums.length;
-            int []results = new int[nums.length-n+1];
-            int index = 1;
-
-            results[0] = deque.peekFirst();
-            for (int i = k;i<nums.length;i++){
-
-                while (deque.peekFirst()<deque.peekLast() || deque.size()>k-1){
-                    deque.removeFirst();
-                }
-                deque.addLast(nums[i]);
-                results[index] = deque.peekFirst();
-                index++;
-            }
-            return results;
         }
+        int n = (nums.length >= k) ? k : nums.length;
+        int[] results = new int[nums.length - n + 1];
+        int index = 1;
 
+        results[0] = nums[deque.peekFirst()];
+        for (int i = k; i < nums.length; i++) {
+            clearDeque(deque,nums,i,k);
+            deque.addLast(i);
+            results[index] = nums[deque.peekFirst()];
+            index++;
+        }
+        return results;
     }
 
+    private void clearDeque(Deque<Integer> deque, int[] nums, int i, int k) {
+        if (!deque.isEmpty() && deque.getFirst() == i - k) {
+            deque.removeFirst();
+        }
+
+        while (!deque.isEmpty() && nums[deque.getLast()] < nums[i]) {
+            deque.removeLast();
+        }
+    }
 
 
 }
