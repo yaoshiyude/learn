@@ -1,13 +1,8 @@
 package com.example.learn.controller;
 
-import org.apache.catalina.core.ApplicationContext;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
-
-import java.util.Collection;
-import java.util.List;
 
 /**
  * @description:

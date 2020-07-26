@@ -26,4 +26,9 @@ public class TestController {
         System.out.println("全部上下文"+allBeanFactoryAndAppContext.toString());
         return "hello";
     }
+
+    public static void main(String[] args) {
+        String a = null;
+        System.out.println(a);
+    }
 }

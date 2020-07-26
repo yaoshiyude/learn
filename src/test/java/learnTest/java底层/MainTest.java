@@ -9,24 +9,13 @@ package learnTest.java底层;
 public class MainTest {
 
     public static void main(String[] args) {
-        NodeTest end = new NodeTest();
-        NodeTest node = new NodeTest();
+        System.out.println("当前代码所在行"+getLine());
+    }
 
-        System.out.println(end);
-        System.out.println(node);
-
-        NodeTest tail = end;
-
-        System.out.println(tail);
-
-        NodeTest prde = tail;
-        System.out.println(prde);
-        tail = node;
-        System.out.println(tail);
-
-        System.out.println("---------------------");
-        System.out.println(end);
-        System.out.println(tail);
-        System.out.println(prde);
+    private static int getLine(){
+        StackTraceElement []stackTraceElement = Thread.currentThread().getStackTrace();
+        StackTraceElement e = stackTraceElement[2];
+        int line = e.getLineNumber();
+        return line;
     }
 }

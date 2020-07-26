@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Application {
 
     public static void main(String[] args) {
+        System.out.println("springBoot开始加载");
         SpringApplication.run(Application.class, args);
+        System.out.println("springBoot加载结束");
     }
 
 }
